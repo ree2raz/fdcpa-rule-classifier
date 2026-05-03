@@ -1,0 +1,146 @@
+[
+  {
+    "rule_id": "FDCPA-001",
+    "transcript_chunk": "Agent: Good morning, this is Alex from [AGENCY_NAME]. I'm calling in regards to an account for [CONSUMER_NAME]. Before we proceed, I need to let you know that I am a debt collector and any information obtained during this communication will be used for the purpose of collecting a debt. Am I speaking with [CONSUMER_NAME]?\nConsumer: Yes, this is [CONSUMER_NAME]. What account is this about?\nAgent: Thank you for confirming. I'm calling about account [ACCOUNT_NUMBER] with a current balance of $[AMOUNT]. Can you verify your date of birth for security purposes?\nConsumer: Sure, it's [DOB]. Can you tell me more about this debt?",
+    "verdict": "pass",
+    "reasoning": "The agent properly identified themselves as a debt collector and stated the purpose of information collection at the start of the communication, meeting the Mini-Miranda disclosure requirement."
+  },
+  {
+    "rule_id": "FDCPA-001",
+    "transcript_chunk": "Agent: Hi, is [CONSUMER_NAME] available?\nConsumer: Speaking. Who is this?\nAgent: This is Jordan from [AGENCY_NAME]. We need to discuss an outstanding balance on your account [ACCOUNT_NUMBER]. The total amount due is $[AMOUNT]. When can we expect payment?\nConsumer: Wait, who are you with again? What is this about?\nAgent: [AGENCY_NAME]. We handle past-due accounts. Can you make a payment today?",
+    "verdict": "fail",
+    "reasoning": "The agent failed to provide the Mini-Miranda disclosure — they did not identify as a debt collector or state that information obtained would be used for debt collection purposes."
+  },
+  {
+    "rule_id": "FDCPA-002",
+    "transcript_chunk": "Consumer: I'm sending you a written request to validate this debt. I don't believe I owe this amount.\nAgent: Absolutely, [CONSUMER_NAME]. You have the right to request validation. Once we receive your written request, we will mail you the verification including the original creditor name, the amount owed, and a copy of the judgment if applicable. Please send your request to [AGENCY_NAME], PO Box [ADDRESS]. We will pause collection activity until verification is provided.\nConsumer: Thank you. How long will that take?\nAgent: We aim to respond within 10 business days of receiving your letter.",
+    "verdict": "pass",
+    "reasoning": "The agent properly acknowledged the consumer's right to validation and committed to providing verification with the required details while pausing collection activity."
+  },
+  {
+    "rule_id": "FDCPA-002",
+    "transcript_chunk": "Consumer: I want to dispute this debt. I need validation.\nAgent: [CONSUMER_NAME], we've already sent you the notice. The debt is valid. It's from [CREDITOR_NAME] for $[AMOUNT]. You need to pay this.\nConsumer: But I never received proper validation. I'm requesting it now in writing.\nAgent: We don't need to send anything else. The debt has been verified internally. Would you like to set up a payment plan?\nConsumer: No, I want proper validation.\nAgent: Like I said, it's been verified. Let's talk about payment options.",
+    "verdict": "fail",
+    "reasoning": "The agent refused to provide debt validation upon the consumer's written request and continued collection activity without providing verification."
+  },
+  {
+    "rule_id": "FDCPA-003",
+    "transcript_chunk": "Agent: Good afternoon, this is Morgan from [AGENCY_NAME]. I'm calling at 2:30 PM Eastern regarding account [ACCOUNT_NUMBER] for [CONSUMER_NAME].\nConsumer: Hi Morgan. Yes, I'm available to talk right now.\nAgent: Great. The current balance on your account is $[AMOUNT]. I wanted to discuss potential payment arrangements.\nConsumer: I appreciate you calling at a reasonable hour. Can we set up a payment plan?",
+    "verdict": "pass",
+    "reasoning": "The call was placed at 2:30 PM, well within the permitted hours of 8:00 AM to 9:00 PM in the consumer's time zone."
+  },
+  {
+    "rule_id": "FDCPA-003",
+    "transcript_chunk": "Agent: [Phone rings at 10:45 PM]\nConsumer: Hello? Who is this?\nAgent: This is Riley from [AGENCY_NAME]. We're calling about your past-due account [ACCOUNT_NUMBER].\nConsumer: It's almost 11 PM! Why are you calling so late?\nAgent: We're just trying to reach you. You haven't been answering during the day. The balance is $[AMOUNT]. When can you pay?\nConsumer: You can't call this late. It's unreasonable.\nAgent: We need to resolve this account. Can we discuss payment now?",
+    "verdict": "fail",
+    "reasoning": "The agent called at 10:45 PM, well outside the permitted 8:00 AM to 9:00 PM time window, constituting a clear FDCPA violation."
+  },
+  {
+    "rule_id": "FDCPA-004",
+    "transcript_chunk": "Agent: Good morning, am I speaking with [CONSUMER_NAME]?\nConsumer: Yes, this is [CONSUMER_NAME].\nAgent: Thank you. This is Casey from [AGENCY_NAME]. I'm calling regarding account [ACCOUNT_NUMBER]. Before I continue, I need to verify I'm speaking with the right person. Can you confirm the last four of your SSN?\nConsumer: Sure, it's [SSN_LAST4].\nAgent: Thank you. Let's discuss your account balance of $[AMOUNT].\nConsumer: Can you call my wife instead? She handles our finances.\nAgent: I can only discuss this account with you or your attorney, [CONSUMER_NAME]. I'm not able to disclose details to third parties.",
+    "verdict": "pass",
+    "reasoning": "The agent correctly refused to disclose debt details to a third party (the consumer's wife) and only communicated with the consumer directly."
+  },
+  {
+    "rule_id": "FDCPA-004",
+    "transcript_chunk": "Agent: Hi, is [CONSUMER_NAME] home?\nConsumer's Neighbor: No, they're at work. Can I take a message?\nAgent: This is Taylor from [AGENCY_NAME]. We're trying to reach [CONSUMER_NAME] about an outstanding debt of $[AMOUNT]. Could you let them know we called? It's important they call us back about account [ACCOUNT_NUMBER].\nConsumer's Neighbor: Oh, I'll pass that along.\nAgent: Thank you. Our number is [PHONE_NUMBER].",
+    "verdict": "fail",
+    "reasoning": "The agent disclosed the existence of a debt and specific account details to a neighbor, who is not an authorized party under FDCPA third-party disclosure rules."
+  },
+  {
+    "rule_id": "FDCPA-005",
+    "transcript_chunk": "Agent: [CONSUMER_NAME], I understand you're going through a difficult time. The balance on your account is $[AMOUNT]. We have several options available that might work for you. Would you like to hear about our payment plan options?\nConsumer: I really can't pay right now. I lost my job.\nAgent: I'm sorry to hear that. Let me note that in your file. We can explore hardship programs or deferment options. There's no pressure today — I just want you to know what's available.\nConsumer: Thank you for being understanding.\nAgent: Of course. I'll send you information about the hardship program. Take your time reviewing it.",
+    "verdict": "pass",
+    "reasoning": "The agent maintained a respectful, non-threatening tone, showed empathy, and offered legitimate options without pressure or abusive language."
+  },
+  {
+    "rule_id": "FDCPA-005",
+    "transcript_chunk": "Agent: [CONSUMER_NAME], you owe $[AMOUNT] and you need to pay RIGHT NOW.\nConsumer: I told you, I can't pay this week.\nAgent: That's not my problem. You racked up this debt and now you're dodging us. Stop making excuses.\nConsumer: Please don't speak to me that way.\nAgent: I'll speak however I want. You're a deadbeat who doesn't pay their bills. We're going to keep calling until you pay up. Every. Single. Day.\nConsumer: That's harassment.\nAgent: Call it whatever you want. Pay your bills and the calls stop.",
+    "verdict": "fail",
+    "reasoning": "The agent used abusive language ('deadbeat'), threatening behavior, and implied excessive calling to annoy — clear harassment violations under FDCPA."
+  },
+  {
+    "rule_id": "FDCPA-006",
+    "transcript_chunk": "Agent: Good morning [CONSUMER_NAME], this is Drew from [AGENCY_NAME]. I'm calling about a debt owed to [CREDITOR_NAME] in the amount of $[AMOUNT]. This is an attempt to collect a debt. Am I speaking with the right person?\nConsumer: Yes. Can you tell me what this is for?\nAgent: Certainly. This is related to a credit card account [ACCOUNT_NUMBER] that was opened on [DATE]. The last payment was received on [DATE]. The current balance includes principal and allowable interest.\nConsumer: OK, I think I remember that account.",
+    "verdict": "pass",
+    "reasoning": "The agent accurately represented the debt, correctly identified the creditor, and did not make any false or misleading statements about the account."
+  },
+  {
+    "rule_id": "FDCPA-006",
+    "transcript_chunk": "Agent: [CONSUMER_NAME], this is the Legal Affairs Office. We have a warrant out for your arrest regarding unpaid debts totaling $[AMOUNT].\nConsumer: What? A warrant? For a debt?\nAgent: Yes, and unless you pay $[AMOUNT] today, officers will be dispatched to your address at [ADDRESS] tomorrow morning. This is your final notice before we proceed with criminal charges.\nConsumer: I didn't know you could be arrested for debt.\nAgent: You absolutely can. Pay now and we'll cancel the warrant. I need your bank account information immediately.",
+    "verdict": "fail",
+    "reasoning": "The agent falsely represented themselves as a government/legal office, threatened arrest for unpaid debt (which is not legally permissible for consumer debt), and used deception to extract payment."
+  },
+  {
+    "rule_id": "FDCPA-007",
+    "transcript_chunk": "Agent: [CONSUMER_NAME], your account balance is $[AMOUNT]. We can set up a payment plan for $[MONTHLY_AMOUNT] per month, which covers the principal and the interest rate specified in your original agreement with [CREDITOR_NAME]. Would that work for you?\nConsumer: Yes, that sounds fair. Can you send me the agreement in writing?\nAgent: Absolutely. I'll mail it to [ADDRESS] and you'll have 10 days to review before the first payment.\nConsumer: Perfect, thank you.",
+    "verdict": "pass",
+    "reasoning": "The agent offered a payment plan consistent with the original agreement terms and did not attempt to collect unauthorized amounts or use unfair tactics."
+  },
+  {
+    "rule_id": "FDCPA-007",
+    "transcript_chunk": "Agent: [CONSUMER_NAME], your balance is $[AMOUNT], but with our processing fee and expedited handling charge, the total comes to $[INFLATED_AMOUNT].\nConsumer: That's way more than what I owe. Where did these fees come from?\nAgent: Those are standard collection fees. Plus, I need your credit card number now. If you don't pay the full $[INFLATED_AMOUNT] today, we'll add another late penalty.\nConsumer: Those fees weren't in my original agreement.\nAgent: Doesn't matter. You're in collections now. These are our fees. Pay now or it goes up.",
+    "verdict": "fail",
+    "reasoning": "The agent attempted to collect amounts not authorized by the original agreement (inflated fees, processing charges) and used coercive tactics to extract immediate payment."
+  },
+  {
+    "rule_id": "FDCPA-008",
+    "transcript_chunk": "Consumer: I'm sending you a certified letter today requesting that you cease all communication with me regarding this debt.\nAgent: Understood, [CONSUMER_NAME]. Once we receive your written cease and desist notice, we will stop all communication. The only follow-up you may receive is a notification if we intend to take specific action on the account, such as filing a lawsuit. Otherwise, you won't hear from us again.\nConsumer: Thank you for respecting that.\nAgent: You're welcome. Is there anything else before we conclude this communication?",
+    "verdict": "pass",
+    "reasoning": "The agent correctly acknowledged the cease and desist request and accurately described the limited circumstances under which they could contact the consumer again."
+  },
+  {
+    "rule_id": "FDCPA-008",
+    "transcript_chunk": "Consumer: I've already sent you a cease and desist letter. Stop calling me.\nAgent: [CONSUMER_NAME], we received your letter, but we still need to resolve this account. The balance is $[AMOUNT].\nConsumer: You're not supposed to be calling me. I sent the letter two weeks ago.\nAgent: I understand, but my manager said we should keep trying. Can we discuss a settlement? We could offer you 60 cents on the dollar.\nConsumer: I said cease communication.\nAgent: Just hear me out — this is a good deal. You'd only pay $[SETTLEMENT_AMOUNT].\nConsumer: Stop calling this number.",
+    "verdict": "fail",
+    "reasoning": "The agent continued to communicate with the consumer after receiving a cease and desist letter, offering settlements and making repeated contact in violation of FDCPA."
+  },
+  {
+    "rule_id": "FDCPA-009",
+    "transcript_chunk": "Agent: Good morning [CONSUMER_NAME], this is Sam from [AGENCY_NAME]. This is our first communication with you regarding account [ACCOUNT_NUMBER]. Within five business days, you will receive a written notice in the mail at [ADDRESS]. The notice will contain the amount of the debt, the name of the original creditor, and a statement of your right to dispute within 30 days.\nConsumer: OK, I'll watch for that.\nAgent: Please don't hesitate to call us back if you have any questions after reviewing the notice.",
+    "verdict": "pass",
+    "reasoning": "The agent correctly informed the consumer about the written notice that would follow within 5 days, including all required elements: debt amount, creditor name, and dispute rights."
+  },
+  {
+    "rule_id": "FDCPA-009",
+    "transcript_chunk": "Agent: Hi [CONSUMER_NAME], this is Quinn from [AGENCY_NAME]. We're calling about your past-due account [ACCOUNT_NUMBER] with a balance of $[AMOUNT]. When can you pay?\nConsumer: This is the first I'm hearing about this. Don't you have to send me something in writing?\nAgent: We already sent a text message with the details. That should be sufficient.\nConsumer: I never received anything. Don't I have 30 days to dispute?\nAgent: The dispute window has already passed. You need to pay now. We can set up automatic payments over the phone.",
+    "verdict": "fail",
+    "reasoning": "The agent failed to send proper written notice within 5 days of initial communication and falsely claimed a text message was sufficient, also misrepresenting the dispute window."
+  },
+  {
+    "rule_id": "FDCPA-010",
+    "transcript_chunk": "Consumer: I'm formally disputing this debt in writing. I don't believe I owe $[AMOUNT] to [CREDITOR_NAME].\nAgent: I understand, [CONSUMER_NAME]. I'm noting your dispute in our system right now. We will cease all collection activity on this account until we can provide you with verification of the debt. You'll receive the verification by mail, including documentation from the original creditor. Please allow up to 30 days for us to obtain and send that information.\nConsumer: So you won't call me while it's being verified?\nAgent: That's correct. All collection activity is paused until verification is sent to you.",
+    "verdict": "pass",
+    "reasoning": "The agent properly acknowledged the dispute, ceased collection activity, and committed to providing verification before resuming collection."
+  },
+  {
+    "rule_id": "FDCPA-010",
+    "transcript_chunk": "Consumer: I'm disputing this debt. I sent you a written dispute last week.\nAgent: [CONSUMER_NAME], we received your dispute, but the debt has already been verified internally. The balance of $[AMOUNT] is correct. I can offer you a payment plan.\nConsumer: But I disputed it. Aren't you supposed to verify it before continuing?\nAgent: We don't need to do anything additional. The debt is valid. Let's talk about how you're going to pay this. We can do $[MONTHLY_AMOUNT] per month.\nConsumer: I want proper verification.\nAgent: We've already verified it internally. Would you prefer to settle for a lump sum?",
+    "verdict": "fail",
+    "reasoning": "The agent continued collection activity (offering payment plans and settlements) without providing verification of the disputed debt as required."
+  },
+  {
+    "rule_id": "FDCPA-011",
+    "transcript_chunk": "Agent: Good afternoon, am I speaking with [CONSUMER_NAME]?\nConsumer: Yes, but my attorney [ATTORNEY_NAME] is handling this matter. Here's the firm name and number: [ATTORNEY_FIRM], [PHONE_NUMBER].\nAgent: Thank you for that information, [CONSUMER_NAME]. I'll update our records to show you have legal representation. Going forward, all communications regarding account [ACCOUNT_NUMBER] will be directed to your attorney. Is there a preferred mailing address for the firm?\nConsumer: Yes, it's [ATTORNEY_ADDRESS].\nAgent: Perfect. We'll send all future correspondence there. Have a good day.",
+    "verdict": "pass",
+    "reasoning": "Upon learning the consumer is represented by an attorney, the agent correctly agreed to direct all future communications to the attorney."
+  },
+  {
+    "rule_id": "FDCPA-011",
+    "transcript_chunk": "Agent: [CONSUMER_NAME], we need to discuss your account [ACCOUNT_NUMBER] with a balance of $[AMOUNT].\nConsumer: I have an attorney handling this. [ATTORNEY_NAME] at [ATTORNEY_FIRM]. You should be talking to them.\nAgent: I understand, but you're the one who owes the money. Let's work this out directly — it's faster.\nConsumer: My attorney said all communication should go through them.\nAgent: I can talk to whoever I want about this debt. Now, can you make a payment of $[MONTHLY_AMOUNT] today? It'll save you attorney fees.\nConsumer: Please call my attorney.\nAgent: Let's just resolve this between us. What's your bank account number?",
+    "verdict": "fail",
+    "reasoning": "Despite being informed the consumer has legal representation, the agent continued to communicate directly with the consumer instead of the attorney."
+  },
+  {
+    "rule_id": "FDCPA-012",
+    "transcript_chunk": "Agent: [CONSUMER_NAME], this is Blake from [AGENCY_NAME]. I'm calling about your account [ACCOUNT_NUMBER] with a balance of $[AMOUNT]. We'd like to discuss payment options before considering any further action.\nConsumer: What do you mean by further action?\nAgent: If we're unable to reach a resolution, our client may choose to pursue legal remedies available under the law, which could include filing a civil lawsuit. That's not a decision we've made — I'm just letting you know the possible outcomes. Right now, we'd prefer to work out a payment arrangement.\nConsumer: OK, let me think about it.\nAgent: Take your time. Our number is [PHONE_NUMBER] if you'd like to call back.",
+    "verdict": "pass",
+    "reasoning": "The agent referenced only legally permissible actions (civil lawsuit) and accurately stated no decision had been made, without threatening actions they cannot or don't intend to take."
+  },
+  {
+    "rule_id": "FDCPA-012",
+    "transcript_chunk": "Agent: [CONSUMER_NAME], this is urgent. We are filing a lawsuit against you tomorrow morning and the sheriff will be at your door by Friday to arrest you if you don't pay $[AMOUNT] today.\nConsumer: You can't arrest me for a debt.\nAgent: Oh yes we can. I've already signed the arrest paperwork. The judge has approved it. Pay now or spend the weekend in jail.\nConsumer: I don't have that kind of money available today.\nAgent: Then I suggest you find it. Borrow from family. Sell something. Because come Friday, you're going to jail and this will be a matter of public record. Your employer will be notified too.",
+    "verdict": "fail",
+    "reasoning": "The agent threatened arrest and jail time for non-payment of a consumer debt, which is not legally permissible, and made false claims about having judicial approval for arrest."
+  }
+]

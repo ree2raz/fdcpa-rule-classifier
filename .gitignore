@@ -1,0 +1,17 @@
+wandb/
+*.safetensors
+checkpoints/
+.env
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+data/raw_generated.jsonl
+data/train.jsonl
+data/val.jsonl
+data/test.jsonl
+results/*.png
+results/eval_results.json
+*.egg-info/
+dist/
+build/
+.ipynb_checkpoints/
