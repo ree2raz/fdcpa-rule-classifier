@@ -115,13 +115,15 @@ print(result)
 
 ## Evaluation Results
 
-*Results will be populated after training completes.*
+Evaluated on 39 hand-reviewed test examples across 12 FDCPA rules (23 pass / 16 fail).
 
 | Model | Accuracy | F1 (macro) | Parse Rate |
 |-------|----------|------------|------------|
-| o3-mini | — | — | — |
-| Qwen Base (zero-shot) | — | — | — |
-| **Qwen QLoRA (this model)** | **—** | **—** | **—** |
+| o3-mini (ceiling) | **100.0%** | **1.000** | 46.2% |
+| Qwen Base (zero-shot) | 76.9% | 0.769 | **100.0%** |
+| **Qwen QLoRA (this model)** | **84.6%** | **0.846** | **100.0%** |
+
+The fine-tuned model closes ~32% of the gap between the base model (76.9%) and the API ceiling (100%). All 6 errors are false negatives — the model over-predicts violations on transcripts that contain surface-level non-compliance signals (incomplete disclosure, pending verification) despite the agent ultimately complying.
 
 ## Limitations and Biases
 

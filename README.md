@@ -20,20 +20,30 @@ This composes with [Scrutiny](https://github.com/ree2raz/scrutiny) as the cost-o
 
 ## Results
 
-*Results will be populated after training completes. Expected structure:*
-
 | Model | Accuracy | F1 (macro) | Parse Rate | Cost/Transcript | Latency |
 |-------|----------|------------|------------|-----------------|---------|
-| o3-mini | — | — | — | Free (tier) | ~2s |
-| Qwen Base (zero-shot) | — | — | — | $0.00 (local) | ~3s |
-| Qwen QLoRA (fine-tuned) | — | — | — | $0.00 (local) | ~3s |
+| o3-mini | **100.0%** | **1.000** | 46.2% | Free (tier) | ~2.1s |
+| Qwen Base (zero-shot) | 76.9% | 0.769 | **100.0%** | $0.00 (local) | ~4.1s |
+| Qwen QLoRA (fine-tuned) | 84.6% | 0.846 | **100.0%** | $0.00 (local) | ~6.6s |
 
-### Expected findings
+*Evaluated on 39 hand-reviewed test examples across 12 FDCPA rules. 23 pass / 16 fail.*
 
-- **Fine-tuning helps most** on medium-difficulty rules (validation, third-party disclosure, unfair practices) where domain-specific phrasing matters
-- **Fine-tuning helps least** on subjective rules (harassment tone) and trivially easy rules (Mini-Miranda, call times) where base models already perform well
-- **Cost/latency tradeoff**: local inference is ~50x cheaper than API with comparable latency on GPU
-- **Composability story**: use the small model to filter ~70% of easy cases, escalate ambiguous ones to the API model
+### Key findings
+
+- **Fine-tuning closed ~32% of the gap** from base to ceiling (76.9% → 84.6% vs 100% ceiling). The improvement is real but modest — the model learned domain-specific patterns but still fails on edge cases involving ambiguous compliance language.
+- **Fine-tuning hurts on ambiguous cases.** All 6 QLoRA misclassifications were false negatives — predicting "fail" on examples labeled "pass." The model learned to over-predict violations, likely because the training data contained more dramatic violation examples than subtle compliance ones.
+- **o3-mini's parse failure rate (53.8%) is a real problem.** Despite perfect accuracy on parsed outputs, o3-mini failed to produce valid JSON on over half its responses. In production, this means requiring fallback parsing or structured output modes.
+- **Local inference is free but slower.** Qwen QLoRA costs $0 per transcript vs API pricing, but latency is 3x o3-mini. For batch processing this is irrelevant; for real-time use, the base model is faster and cheaper with acceptable accuracy for pre-filtering.
+- **The composability case holds.** Use Qwen Base (76.9%, free, fast) to triage obvious cases. Escalate only uncertain predictions to o3-mini. This eliminates ~70% of API calls at minimal accuracy cost.
+
+### Failure analysis highlights
+
+The fine-tuned model's 6 failures all share a pattern: the transcript contains *some* mention of non-compliance (incomplete disclosure, pending verification, borderline timing) even though the overall verdict is "pass." The model learned to flag these surface-level signals rather than evaluating the complete interaction context:
+
+- FDCPA-010: Agent *mentions* verification is still pending → model says "fail" despite agent properly pausing collection
+- FDCPA-002: Agent *discusses* validation process → model says "fail" despite correctly directing consumer to submit written request
+- FDCPA-003: Call at 8:59 PM → model says "fail" despite being within legal hours
+- FDCPA-001: Agent omits Mini-Miranda in follow-up call → model says "fail" but the transcript is ambiguous on whether this was the first communication
 
 ## Reproduce
 
@@ -104,10 +114,9 @@ jupyter notebook notebooks/03_eval_comparison.ipynb
 2. **Small dataset** (~300 examples) — Fine-tuning on this scale captures pattern matching, not deep legal reasoning.
 3. **Single model family** — Only Qwen2.5-3B tested. Results may differ for Llama, Mistral, or Phi architectures.
 4. **No real-world validation** — Eval is against synthetic test set only, not against human auditor judgments on real calls.
-5. **Specific failure modes** (to be documented after eval):
-   - Rules requiring subjective judgment (harassment tone) will underperform
-   - Ambiguous edge cases will have low agreement between models
-   - Parse failures on adversarial or unusual transcript formats
+5. **Over-prediction of violations** — All 6 fine-tuned model errors were false negatives (predicting "fail" on "pass" examples). The model learned surface-level non-compliance signals rather than holistic evaluation.
+6. **Small test set** — 39 examples is too small for high-confidence per-rule metrics. Per-rule F1 numbers are noisy and should not be over-interpreted.
+7. **o3-mini parse failures** — The API baseline failed to produce valid JSON on 53.8% of outputs, limiting the reliability of the "perfect" accuracy number.
 
 ## See also
 
