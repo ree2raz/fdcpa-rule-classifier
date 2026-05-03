@@ -64,9 +64,9 @@ def get_training_args(output_dir: str | Path = OUTPUT_DIR) -> TrainingArguments:
     return TrainingArguments(
         output_dir=str(output_dir),
         num_train_epochs=3,
-        per_device_train_batch_size=4,
+        per_device_train_batch_size=2,
         per_device_eval_batch_size=4,
-        gradient_accumulation_steps=4,
+        gradient_accumulation_steps=2,
         learning_rate=2e-4,
         lr_scheduler_type="cosine",
         warmup_ratio=0.1,
@@ -84,6 +84,7 @@ def get_training_args(output_dir: str | Path = OUTPUT_DIR) -> TrainingArguments:
         max_grad_norm=1.0,
         seed=42,
         dataloader_pin_memory=False,
+        gradient_checkpointing=True
     )
 
 
