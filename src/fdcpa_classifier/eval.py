@@ -189,7 +189,7 @@ def run_inference_openai(
         start = time.time()
         response = client.chat.completions.create(
             model=OPENAI_MODEL,
-            max_tokens=256,
+            max_completion_tokens=256,
             messages=[
                 {"role": "system", "content": EVAL_SYSTEM},
                 {"role": "user", "content": prompt},
